@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import dotenv from "dotenv"
+import { JWT_SECRET } from '@repo/common/common'
 dotenv.config({ path: "../../.env" }) 
 
 interface JwtPayload{
@@ -19,7 +20,7 @@ const authMiddleware = async(req:Request,res:Response,next:NextFunction)=>{
     }
 
     //Decode or Verify the token
-    const decoded = jwt.verify(token,process.env.JWT_SECRET as string) as JwtPayload
+    const decoded = jwt.verify(token,JWT_SECRET as string) as JwtPayload
     if (!decoded) {
       return res.status(401).json({
         message:`Unauthorized Token`

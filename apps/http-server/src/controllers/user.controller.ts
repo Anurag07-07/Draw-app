@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import {UserSigninValidation, UserSignupValidation} from '@repo/common/common'
+import {JWT_SECRET, UserSigninValidation, UserSignupValidation} from '@repo/common/common'
 import {prisma} from '@repo/db/db'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
@@ -90,7 +90,7 @@ export const Signin = async(req:Request,res:Response)=>{
       //Create a token
       const token = jwt.sign({
         id:present.id.toString() 
-      },process.env.JWT_SECRET as string)
+      },JWT_SECRET as string)
       
         res.cookie('token',token,{
           httpOnly:true,

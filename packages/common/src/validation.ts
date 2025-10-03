@@ -14,3 +14,5 @@ export const UserSigninValidation = z.object({
 export const RoomValidation = z.object({
   roomdId:z.number()
 })
+
+export const JWT_SECRET = "Excildraw"
